@@ -1,132 +1,23 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import "./App.css";
+import React, { useEffect, useState } from "react";
 
-function App() {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confPassword, setConfPassword] = useState("");
+// https://www.geeksforgeeks.org/how-to-call-loading-function-with-react-useeffect/?ref=gcse
+const App = (props) => {
+  const [btnText, updatebtnText] = useState("");
 
-  // function to update state of name with
-  // value enter by user in form
-  const handleChange = (e) => {
-    setName(e.target.value);
+  const loadDataOnlyOnce = () => {
+    updatebtnText("Hello kapil");
   };
-  // function to update state of age with value
-  // enter by user in form
-  const handleAgeChange = (e) => {
-    setAge(e.target.value);
-  };
-  // function to update state of email with value
-  // enter by user in form
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-  // function to update state of password with
-  // value enter by user in form
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-  // function to update state of confirm password
-  // with value enter by user in form
-  const handleConfPasswordChange = (e) => {
-    setConfPassword(e.target.value);
-  };
-  // below function will be called when user
-  // click on submit button .
-  const handleSubmit = (e) => {
-    if (password != confPassword) {
-      // if 'password' and 'confirm password'
-      // does not match.
-      alert("password Not Match");
-    } else {
-      // display alert box with user
-      // 'name' and 'email' details .
-      alert(
-        'A form was submitted with Name :"' +
-          name +
-          '" ,Age :"' +
-          age +
-          '" and Email :"' +
-          email +
-          '"'
-      );
-    }
-    e.preventDefault();
-  };
+
+  // This function will called only once
+  useEffect(() => {
+    loadDataOnlyOnce();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <form
-          onSubmit={(e) => {
-            handleSubmit(e);
-          }}
-        >
-          <h2> Geeks For Geeks </h2>
-          <h3> Sign-up Form </h3>
-          <img src="/image001.png" />
-          <label>Name:</label>
-          <br />
-          <input
-            type="text"
-            value={name}
-            required
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          />
-          <br />
-          <label>Age:</label>
-          <br />
-          <input
-            type="text"
-            value={age}
-            required
-            onChange={(e) => {
-              handleAgeChange(e);
-            }}
-          />
-          <br />
-          <label>Email:</label>
-          <br />
-          <input
-            type="email"
-            value={email}
-            required
-            onChange={(e) => {
-              handleEmailChange(e);
-            }}
-          />
-          <br />
-          <label>Password:</label>
-          <br />
-          <input
-            type="password"
-            value={password}
-            required
-            onChange={(e) => {
-              handlePasswordChange(e);
-            }}
-          />
-          <br />
-          <label>Confirm Password:</label>
-          <br />
-          <input
-            type="password"
-            value={confPassword}
-            required
-            onChange={(e) => {
-              handleConfPasswordChange(e);
-            }}
-          />
-          <br />
-          <input type="submit" value="Submit" />
-        </form>
-      </header>
+    <div style={{ margin: 200 }}>
+      <button onClick={() => updatebtnText("Hi")}>{btnText}</button>
     </div>
   );
-}
+};
 
 export default App;
