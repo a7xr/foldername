@@ -1,35 +1,41 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
+import List from "./List";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    // Set initial state
-    this.state = {
-      count: 0,
-    };
-
-    // Binding this keyword
-    this.updateState = this.updateState.bind(this);
+function App() {
+  {
+    /* Initial states */
   }
+  const [input, setInput] = useState(1);
+  const [light, setLight] = useState(true);
 
-  updateState() {
-    // Changing state
-    this.setState((prevState) => {
-      return { count: prevState.count + 1 };
-    });
+  const getItems = () => {
+    return [input + 10, input + 100];
+  };
+
+  {
+    /* Style for changing the theme */
   }
+  const theme = {
+    backgroundColor: light ? "White" : "grey",
+    color: light ? "grey" : "white",
+  };
 
-  render() {
-    return (
-      <div>
-        <h2>Click Counter</h2>
-        <p>You have clicked me {this.state.count} times.</p>
-        {/* Set click handler */}
-        <button onClick={this.updateState}>Click me!</button>
+  return (
+    <>
+      <div style={theme}>
+        <input
+          type="number"
+          value={input}
+          onChange={(event) => setInput(parseInt(event.target.value))}
+        />
+
+        <button onClick={() => setLight((prevLight) => !prevLight)}>
+          {light ? "dark mode" : "light mode"}
+        </button>
+        <List getItems={getItems} />
       </div>
-    );
-  }
+    </>
+  );
 }
 
 export default App;
