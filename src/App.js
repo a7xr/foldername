@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 
+// https://www.geeksforgeeks.org/reactjs-usestate-hook/?ref=gcse
 function App() {
-  const [click, setClick] = useState(0);
+  const [click, setClick] = useState([]);
+
+  const addNumber = () => {
+    setClick([
+      ...click,
+      {
+        id: click.length,
+        value: Math.random() * 10,
+      },
+    ]);
+  };
 
   return (
     <div>
-      <p>You've clicked {click} times!</p>
-
-      <p>
-        The number of times you have clicked is{" "}
-        {click % 2 == 0 ? "even!" : "odd!"}
-      </p>
-
-      <button onClick={() => setClick((click) => click + 1)}>Click me</button>
+      <ul>
+        {click.map((item) => (
+          <li key={item.id}>{item.value}</li>
+        ))}
+      </ul>
+      <button onClick={addNumber}>Click me</button>
     </div>
   );
 }
