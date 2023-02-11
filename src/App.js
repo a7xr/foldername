@@ -1,59 +1,23 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 
-// https://www.geeksforgeeks.org/reactjs-usestate-hook/?ref=gcse
-function App() {
-  const [data, setData] = useState({
-    username: "",
-    password: "",
-  });
-  const [form, setForm] = useState({
-    username: "",
-    password: "",
-  });
-  const [submit, submitted] = useState(false);
-
-  const printValues = (e) => {
-    e.preventDefault();
-    setForm({
-      username: data.username,
-      password: data.password,
-    });
-    submitted(true);
+// https://www.geeksforgeeks.org/what-is-usestate-how-it-has-been-used-to-validate-input-values/?ref=rp
+const App = () => {
+  const [name, updateName] = useState("kapil");
+  const handleUpdate = () => {
+    updateName("Nikhil");
   };
-
-  const updateField = (e) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <div>
-      <form onSubmit={printValues}>
-        <label>
-          Username:
-          <input value={data.username} name="username" onChange={updateField} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            value={data.password}
-            name="password"
-            type="password"
-            onChange={updateField}
-          />
-        </label>
-        <br />
-        <button>Submit</button>
-      </form>
-
-      <p>{submit ? form.username : null}</p>
-
-      <p>{submit ? form.password : null}</p>
+      <button
+        style={{ margin: 100 }}
+        onClick={() => {
+          handleUpdate();
+        }}
+      >
+        change Name
+      </button>
+      {name}
     </div>
   );
-}
-
+};
 export default App;
