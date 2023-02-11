@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+
+
 function List({ getItems }) {
   /* Initial state of the items */
   const [items, setItems] = useState([]);
