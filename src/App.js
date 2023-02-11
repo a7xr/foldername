@@ -2,26 +2,56 @@ import React, { useState } from "react";
 
 // https://www.geeksforgeeks.org/reactjs-usestate-hook/?ref=gcse
 function App() {
-  const [click, setClick] = useState([]);
+  const [data, setData] = useState({
+    username: "",
+    password: "",
+  });
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
+  const [submit, submitted] = useState(false);
 
-  const addNumber = () => {
-    setClick([
-      ...click,
-      {
-        id: click.length,
-        value: Math.random() * 10,
-      },
-    ]);
+  const printValues = (e) => {
+    e.preventDefault();
+    setForm({
+      username: data.username,
+      password: data.password,
+    });
+    submitted(true);
+  };
+
+  const updateField = (e) => {
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
     <div>
-      <ul>
-        {click.map((item) => (
-          <li key={item.id}>{item.value}</li>
-        ))}
-      </ul>
-      <button onClick={addNumber}>Click me</button>
+      <form onSubmit={printValues}>
+        <label>
+          Username:
+          <input value={data.username} name="username" onChange={updateField} />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input
+            value={data.password}
+            name="password"
+            type="password"
+            onChange={updateField}
+          />
+        </label>
+        <br />
+        <button>Submit</button>
+      </form>
+
+      <p>{submit ? form.username : null}</p>
+
+      <p>{submit ? form.password : null}</p>
     </div>
   );
 }
