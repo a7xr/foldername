@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import ReactDOM from "react-dom/client";
 
-// https://www.geeksforgeeks.org/how-to-call-loading-function-with-react-useeffect/?ref=gcse
-const App = (props) => {
-  const [btnText, updatebtnText] = useState("");
+// https://www.w3schools.com/react/showreact.asp?filename=demo2_react_useeffect_settimeout3
+function Counter() {
+  const [count, setCount] = useState(0);
+  const [calculation, setCalculation] = useState(0);
 
-  const loadDataOnlyOnce = () => {
-    updatebtnText("Hello kapil");
-  };
-
-  // This function will called only once
   useEffect(() => {
-    loadDataOnlyOnce();
-  }, []);
+    setCalculation(() => count * 2);
+  }, [count]); // <- add the count variable here
 
   return (
-    <div style={{ margin: 200 }}>
-      <button onClick={() => updatebtnText("Hi")}>{btnText}</button>
-    </div>
+    <>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount((c) => c + 1)}>+</button>
+      <p>Calculation: {calculation}</p>
+    </>
   );
-};
+}
 
-export default App;
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<Counter />);
+
+export default Counter;
