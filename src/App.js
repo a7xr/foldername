@@ -1,46 +1,32 @@
-import React, { useCallback, useState } from "react";
-import List from "./List";
+import React, { useEffect, useState } from "react";
 
 // https://www.geeksforgeeks.org/when-to-use-usecallback-usememo-and-useeffect/?ref=leftbar-rightbar
 
 function App() {
-  {
-    /* Initial states */
-  }
-  const [input, setInput] = useState(1);
-  const [light, setLight] = useState(true);
-
-  {
-    /* useCallback memoizes the getItems() which 
-       returns a list of number which is number+10
-       and number + 100 */
-  }
-  const getItems = useCallback(() => {
-    return [input + 10, input + 100];
-  }, [input]);
-
-  {
-    /* style for changing the theme */
-  }
-  const theme = {
-    backgroundColor: light ? "White" : "grey",
-    color: light ? "grey" : "white",
+  /* Some data */
+  const data = {
+    Colors: ["red", "green", "yellow"],
+    Fruits: ["Apple", "mango", "Banana"],
   };
+
+  /* Initial states */
+  const [currentChoice, setCurrentChoice] = useState("Colors");
+  const [items, setItems] = useState([]);
+
+  /* Using useEffect to set the data of currentchoice
+       to items and console log the fetching... */
+  useEffect(() => {
+    setItems(data[currentChoice]);
+    console.log("Data is fetched!");
+  }, [currentChoice]);
 
   return (
     <>
-      <div style={theme}>
-        <input
-          type="number"
-          value={input}
-          onChange={(event) => setInput(parseInt(event.target.value))}
-        />
-
-        <button onClick={() => setLight((prevLight) => !prevLight)}>
-          {light ? "dark mode" : "light mode"}
-        </button>
-        <List getItems={getItems} />
-      </div>
+      <button onClick={() => setCurrentChoice("Colors")}>Colors</button>
+      <button onClick={() => setCurrentChoice("Fruits")}>Fruits</button>
+      {items.map((item) => {
+        return <div key={item}>{item}</div>;
+      })}
     </>
   );
 }
