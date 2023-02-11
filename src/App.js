@@ -1,25 +1,21 @@
-import { useState, useEffect } from "react";
-import ReactDOM from "react-dom/client";
+import React, { useState, useEffect } from "react";
 
-// https://www.w3schools.com/react/showreact.asp?filename=demo2_react_useeffect_settimeout3
-function Counter() {
+// https://reactjs.org/docs/hooks-effect.html
+function Example() {
   const [count, setCount] = useState(0);
-  const [calculation, setCalculation] = useState(0);
 
+  // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
-    setCalculation(() => count * 2);
-  }, [count]); // <- add the count variable here
+    // Update the document title using the browser API
+    document.title = `You clicked ${count} times`;
+  });
 
   return (
-    <>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount((c) => c + 1)}>+</button>
-      <p>Calculation: {calculation}</p>
-    </>
+    <div>
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+    </div>
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Counter />);
-
-export default Counter;
+export default Example;
