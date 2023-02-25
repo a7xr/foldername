@@ -47,4 +47,29 @@ var posts = [
 posts = _.keyBy(posts, "id");
 
 var post = posts["34abc"];
-console.log(post); // { id: '34abc', title: 'The blog post we want', content: '...' }
+// console.log(post); // { id: '34abc', title: 'The blog post we want', content: '...' }
+
+var users = [
+  { name: "John", age: 30 },
+  { name: "Jane", age: 28 },
+  { name: "Bill", age: 65 },
+  { name: "Emily", age: 17 },
+  { name: "Jack", age: 30 },
+];
+
+var reducedUsers = _.reduce(
+  users,
+  function (result, user) {
+    if (user.age >= 18 && user.age <= 59) {
+      (result[user.age] || (result[user.age] = [])).push(user);
+    }
+
+    return result;
+  },
+  {}
+);
+console.log(reducedUsers);
+// // {
+// //     '28': [ { name: 'Jane', age: 28 } ],
+// //     '30': [ { name: 'John', age: 30 }, { name: 'Jack', age: 30 } ]
+// //   }
