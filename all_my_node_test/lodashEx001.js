@@ -73,3 +73,15 @@ console.log(reducedUsers);
 // //     '28': [ { name: 'Jane', age: 28 } ],
 // //     '30': [ { name: 'John', age: 30 }, { name: 'Jack', age: 30 } ]
 // //   }
+
+var original = { foo: "bar" };
+var copy = original;
+copy.foo = "new value";
+// copy -> { foo: "new value" } Yeah!
+// original -> { foo: "new value" } Oops!
+
+var original = { foo: "bar" };
+var copy = _.cloneDeep(original);
+copy.foo = "new value";
+// copy -> { foo: "new value" } Yeah!
+// original -> { foo: "bar" } Yeah!
