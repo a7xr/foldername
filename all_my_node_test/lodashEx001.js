@@ -68,7 +68,7 @@ var reducedUsers = _.reduce(
   },
   {}
 );
-console.log(reducedUsers);
+// console.log(reducedUsers);
 // // {
 // //     '28': [ { name: 'Jane', age: 28 } ],
 // //     '30': [ { name: 'John', age: 30 }, { name: 'Jack', age: 30 } ]
@@ -85,3 +85,7 @@ var copy = _.cloneDeep(original);
 copy.foo = "new value";
 // copy -> { foo: "new value" } Yeah!
 // original -> { foo: "bar" } Yeah!
+
+var sortedArray = [1, 1, 2, 3, 3, 3, 5, 8, 8];
+var result = _.sortedUniq(sortedArray);
+console.log(result);
