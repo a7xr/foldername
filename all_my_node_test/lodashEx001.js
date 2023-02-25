@@ -6,14 +6,14 @@ var foo = { a: "a property" };
 var bar = { b: 4, c: "an other property" };
 
 var result = _.assign({ a: "an old property" }, foo, bar);
-// console.log(result);
+// console.log(result); // { a: 'a property', b: 4, c: 'an other property' }
 
 function getRandomInteger() {
   return Math.round(Math.random() * 100);
 }
 
 var result = _.times(5, getRandomInteger);
-// console.log(result);
+// console.log(result); // [ 8, 57, 43, 67, 98 ]
 
 var users = [
   { firstName: "John", lastName: "Doe", age: 28, gender: "male" },
@@ -23,9 +23,15 @@ var users = [
 ];
 
 var user = _.find(users, { lastName: "Doe", gender: "male" });
-console.log(user);
+// console.log(user); // { firstName: 'John', lastName: 'Doe', age: 28, gender: 'male' }
 
-var underAgeUser = _.find(users, function(user) {
-	return user.age < 18;
+var underAgeUser = _.find(users, function (user) {
+  return user.age < 18;
 });
-console.log(underAgeUser);
+console.log(underAgeUser); // { firstName: 'Jane', lastName: 'Doe', age: 5, gender: 'female' }
+
+var bar = { foo: { key: "foo" } };
+_.set(bar, "foo.items[0]", "An item");
+// console.log(bar); // bar => { foo: { key: "foo", items: ["An item"] } }
+var name = _.get(bar, "name", "John Doe");
+console.log(name); // name => John Doe
